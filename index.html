@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AG JOB 求人情報｜医療・介護・美容のお仕事</title>
+<meta name="description" content="AG JOB（合同会社AmaGis）の求人情報。看護師をはじめ医療・介護・美容のお仕事を掲載しています。気になる求人はLINEでお気軽にご相談ください。">
+<meta property="og:title" content="AG JOB 求人情報">
+<meta property="og:description" content="医療・介護・美容のお仕事情報。気になる求人はLINEでご相談ください。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f5e63">
+<style>
+  :root{
+    --bg:#f4f6f5; --card:#ffffff; --ink:#1c2b2d; --sub:#5b6b6d; --line:#e2e8e6;
+    --brand:#0f5e63; --brand-2:#138087; --brand-soft:#e3f1f0; --accent:#e8743b;
+    --line-green:#06c755; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+    font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+  /* header */
+  header.top{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;padding:18px 0 22px}
+  .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .brand b{font-size:24px;letter-spacing:.04em}
+  .brand span{font-size:13px;opacity:.9}
+  .lead{margin:6px 0 0;font-size:13px;opacity:.92}
+
+  /* search & filters */
+  .panel{background:var(--card);border-radius:var(--radius);margin:-12px 0 12px;padding:14px;
+    box-shadow:0 4px 18px rgba(15,94,99,.10);position:relative}
+  .search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:0 12px;background:#fbfcfc}
+  .search svg{flex:none;color:var(--sub)}
+  .search input{border:0;outline:0;background:transparent;font-size:16px;padding:11px 0;width:100%;color:var(--ink)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;color:var(--sub);cursor:pointer}
+  .chip.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+  .selects{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+  select{appearance:none;-webkit-appearance:none;width:100%;border:1.5px solid var(--line);border-radius:10px;
+    padding:9px 28px 9px 10px;font-size:14px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235b6b6d' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center;color:var(--ink)}
+  .bar{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 10px;font-size:13px;color:var(--sub)}
+  .bar b{color:var(--ink);font-size:16px}
+  .bar select{width:auto;padding:5px 26px 5px 10px;font-size:13px}
+
+  /* cards */
+  .list{display:grid;gap:12px;padding-bottom:12px}
+  .card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--line);cursor:pointer;
+    transition:transform .08s ease, box-shadow .15s ease;text-align:left;width:100%;font:inherit;color:inherit}
+  .card:active{transform:scale(.99)}
+  .card:hover{box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+  .bdg{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--brand-soft);color:var(--brand);font-weight:600}
+  .bdg.new{background:#fff1e8;color:var(--accent)}
+  .bdg.gray{background:#eef1f1;color:var(--sub)}
+  .card h3{margin:0 0 8px;font-size:16.5px;line-height:1.45}
+  .meta{display:grid;gap:4px;font-size:14px}
+  .meta div{display:flex;gap:8px;align-items:flex-start}
+  .meta svg{flex:none;margin-top:3px;color:var(--brand-2)}
+  .pay{font-weight:700;color:var(--ink)}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:var(--sub)}
+  .more{color:var(--brand);font-weight:600;font-size:13px}
+
+  .empty{background:var(--card);border-radius:var(--radius);padding:28px 18px;text-align:center;color:var(--sub);border:1px dashed var(--line)}
+  .err{background:#fff4f2;border:1px solid #f5c2bb;color:#8a2a1c;border-radius:var(--radius);padding:14px;margin-bottom:12px;font-size:14px}
+
+  /* CTA */
+  .cta{background:var(--card);border-radius:var(--radius);padding:18px;margin:8px 0 16px;border:1px solid var(--line);text-align:center}
+  .cta p{margin:0 0 12px;font-size:14px;color:var(--sub)}
+  .btn-line{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--line-green);color:#fff;
+    text-decoration:none;font-weight:700;border-radius:999px;padding:13px 22px;font-size:15px;width:100%;max-width:420px}
+  .btn-sub{display:inline-block;margin-top:10px;background:none;border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;font-size:13px;color:var(--ink);cursor:pointer}
+
+  footer{font-size:12px;color:var(--sub);padding:8px 0 40px;line-height:1.7}
+  footer .box{background:var(--card);border-radius:var(--radius);padding:14px 16px;border:1px solid var(--line)}
+  footer h4{margin:0 0 6px;font-size:13px;color:var(--ink)}
+  footer ul{margin:0;padding-left:1.2em}
+
+  /* detail sheet */
+  .sheet{position:fixed;inset:0;background:rgba(10,30,32,.45);display:none;z-index:50}
+  .sheet.open{display:block}
+  .sheet-body{position:absolute;left:0;right:0;bottom:0;top:6vh;background:var(--bg);border-radius:18px 18px 0 0;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;animation:up .2s ease-out}
+  @keyframes up{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
+  @media(min-width:800px){.sheet-body{left:50%;width:720px;margin-left:-360px;top:4vh;bottom:4vh;border-radius:18px}}
+  .sheet-head{position:sticky;top:0;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);z-index:2}
+  .sheet-head span{font-size:12px;color:var(--sub)}
+  .x{border:0;background:#e6ecea;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;color:var(--ink)}
+  .detail{padding:16px 16px 120px}
+  .detail h2{margin:4px 0 12px;font-size:19px;line-height:1.45}
+  .hl{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--line);display:grid;gap:6px;margin-bottom:12px}
+  .sec{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);margin-bottom:12px;overflow:hidden}
+  .sec h4{margin:0;padding:10px 14px;font-size:13px;background:var(--brand-soft);color:var(--brand)}
+  dl{margin:0}
+  .row{display:grid;grid-template-columns:7.5em 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
+  .row:first-child{border-top:0}
+  .row dt{color:var(--sub)}
+  .row dd{margin:0;white-space:pre-wrap;word-break:break-word}
+  .text{padding:12px 14px;white-space:pre-wrap;word-break:break-word;font-size:14px}
+  .note{font-size:12px;color:var(--sub);margin:4px 2px 0}
+  .sticky-cta{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 70%,rgba(244,246,245,0));padding:14px 16px calc(14px + env(safe-area-inset-bottom));text-align:center}
+  .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1c2b2d;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .2s;z-index:60;pointer-events:none}
+  .toast.show{opacity:1}
+  .loading{display:flex;flex-direction:column;align-items:center;gap:12px;padding:36px 0;color:var(--sub);font-size:14px}
+  .spin{width:28px;height:28px;border:3px solid var(--brand-soft);border-top-color:var(--brand);border-radius:50%;animation:rot .8s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b id="siteName">AG JOB</b><span id="siteSub"></span></div>
+    <p class="lead">掲載求人は随時更新しています。気になる求人は、求人番号を添えてLINEでお気軽にご相談ください。</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel" aria-label="求人検索">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="キーワード（例：訪問看護、日勤のみ、駅近）" autocomplete="off">
+    </label>
+    <div class="chips" id="jobChips" role="tablist" aria-label="職種"></div>
+    <div class="selects">
+      <select id="fPref" aria-label="エリア"></select>
+      <select id="fEmp" aria-label="雇用形態"></select>
+      <select id="fFac" aria-label="施設種別"></select>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div><b id="count">0</b> 件の求人</div>
+    <select id="sort" aria-label="並び替え">
+      <option value="new">新着順</option>
+      <option value="pay">給与が高い順</option>
+    </select>
+  </div>
+
+  <div id="error"></div>
+  <div class="list" id="list"><div class="loading"><div class="spin"></div>求人情報を読み込んでいます…</div></div>
+
+  <div class="cta">
+    <p>ご希望に合う求人が見つからない場合も、非公開求人を含めてご提案できます。</p>
+    <a class="btn-line" id="lineMain" href="#" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8.1-6c1.5-1.6 2.2-3.3 2.2-5C22.3 6.6 17.8 3 12 3z"/></svg>
+      LINEで相談する
+    </a>
+  </div>
+
+  <footer>
+    <div class="box">
+      <h4>掲載情報について</h4>
+      <ul>
+        <li>情報の更新日時：<span id="genAt"></span>（このページを開いた時点の最新情報です）</li>
+        <li>勤務先の名称・詳細住所は、ご紹介の際に担当者からお伝えします。</li>
+        <li>賃金・就業時間などの労働条件は、ご紹介時に書面で明示します。掲載内容と異なる場合は、書面の内容が優先されます。</li>
+        <li>求職者の方から手数料をいただくことはありません。</li>
+      </ul>
+      <h4 style="margin-top:12px">運営</h4>
+      <div id="company"></div>
+    </div>
+  </footer>
+</main>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="sheet-body" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+    <div class="sheet-head"><span id="dId"></span><button class="x" id="closeBtn" aria-label="閉じる">×</button></div>
+    <div class="detail" id="detail"></div>
+    <div class="sticky-cta">
+      <a class="btn-line" id="lineDetail" href="#" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8.1-6c1.5-1.6 2.2-3.3 2.2-5C22.3 6.6 17.8 3 12 3z"/></svg>
+        この求人についてLINEで相談
+      </a><br>
+      <button class="btn-sub" id="copyId">求人番号をコピー</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// 求人データの取得先（★AG JOB 求人サイト の Apps Script）
+const API_URL = 'https://script.google.com/macros/s/AKfycbygILPjkTtxU_H5BQ1WXC9JOLumPMjpAs9DzTTbjeJ8BwTqRJel4Uqyc5f7tRldBYKN/exec?format=json';
+// 取得に失敗したときの表示用（LINE・運営情報）
+const FALLBACK_SITE = { name:'AG JOB', subtitle:'医療・介護・美容のお仕事情報', company:'合同会社AmaGis', license:'27-ユ-305390', email:'amagis.inc@gmail.com', tel:'', lineUrl:'https://lin.ee/OEXdjZl', newDays:14 };
+
+function loadJobs(tries){
+  return fetch(API_URL, { cache:'no-store' })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .catch(err => { if (tries > 0) return new Promise(res => setTimeout(res, 1200)).then(() => loadJobs(tries - 1)); throw err; });
+}
+loadJobs(1).then(data => start(data), () => start({ jobs: [], site: FALLBACK_SITE, generatedAt: '',
+  error: '求人情報の読み込みに失敗しました。通信環境をご確認のうえ、ページを再読み込みしてください。' }));
+</script>
+<script>
+function start(DATA){
+  DATA.site = DATA.site || FALLBACK_SITE;
+  DATA.focusId = new URLSearchParams(location.search).get('id') || '';
+  const S = DATA.site || {};
+  const jobs = (DATA.jobs || []).slice();
+  const $ = id => document.getElementById(id);
+  const state = { q:'', job:'', pref:'', emp:'', fac:'', sort:'new' };
+  const DAY = 86400000;
+
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const yen = n => Number(n).toLocaleString('ja-JP') + '円';
+  const payText = j => {
+    if (j.payMin == null) return '';
+    return j.payUnit + ' ' + yen(j.payMin) + (j.payMax != null && j.payMax !== j.payMin ? '〜' + yen(j.payMax) : (j.payMax == null ? '〜' : ''));
+  };
+  // 給与順の比較用（月額換算の目安）
+  const payMonthly = j => {
+    const v = j.payMax != null ? j.payMax : j.payMin; if (v == null) return 0;
+    if (/時/.test(j.payUnit)) return v * 160;
+    if (/日/.test(j.payUnit)) return v * 21;
+    if (/年/.test(j.payUnit)) return v / 12;
+    return v;
+  };
+  const titleOf = j => j.title || [j.facility, j.job].filter(Boolean).join('の') + 'のお仕事';
+  const isNew = j => j.updatedTs && (Date.now() - j.updatedTs) <= (S.newDays || 14) * DAY;
+  const firstLine = s => String(s || '').split(/\n/)[0];
+
+  // header / footer
+  $('siteName').textContent = S.name || 'AG JOB';
+  $('siteSub').textContent = S.subtitle || '';
+  $('genAt').textContent = DATA.generatedAt || '';
+  $('company').innerHTML = esc(S.company) + '（有料職業紹介事業 許可番号 ' + esc(S.license) + '）<br>'
+    + 'お問い合わせ：' + (S.email ? '<a href="mailto:' + esc(S.email) + '">' + esc(S.email) + '</a>' : '')
+    + (S.tel ? '　TEL ' + esc(S.tel) : '');
+  $('lineMain').href = S.lineUrl || '#';
+  $('lineDetail').href = S.lineUrl || '#';
+  if (DATA.error) $('error').innerHTML = '<div class="err">' + esc(DATA.error) + '</div>';
+
+  // filter options
+  const uniq = (arr) => Array.from(new Set(arr.filter(Boolean)));
+  const jobsList = uniq(jobs.map(j => j.job));
+  const chipBox = $('jobChips');
+  ['', ...jobsList].forEach(name => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (name === '' ? ' on' : '');
+    b.textContent = name || 'すべて';
+    b.type = 'button';
+    b.onclick = () => { state.job = name; [...chipBox.children].forEach(c => c.classList.toggle('on', c === b)); render(); };
+    chipBox.appendChild(b);
+  });
+  const fillSelect = (el, label, values) => {
+    el.innerHTML = '<option value="">' + label + '</option>' + values.map(v => '<option>' + esc(v) + '</option>').join('');
+  };
+  fillSelect($('fPref'), 'エリア', uniq(jobs.map(j => j.pref)));
+  fillSelect($('fEmp'), '雇用形態', uniq(jobs.map(j => j.empType)));
+  fillSelect($('fFac'), '施設種別', uniq(jobs.map(j => j.facility)));
+
+  $('q').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+  $('fPref').onchange = e => { state.pref = e.target.value; render(); };
+  $('fEmp').onchange = e => { state.emp = e.target.value; render(); };
+  $('fFac').onchange = e => { state.fac = e.target.value; render(); };
+  $('sort').onchange = e => { state.sort = e.target.value; render(); };
+
+  const ICON_PIN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.3 7-12a7 7 0 10-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  const ICON_YEN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l6 8 6-8M12 11v10M7 13h10M7 17h10"/></svg>';
+  const ICON_CLK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+
+  function filtered(){
+    const words = state.q.toLowerCase().split(/[\s\u3000]+/).filter(Boolean);
+    let out = jobs.filter(j => {
+      if (state.job && j.job !== state.job) return false;
+      if (state.pref && j.pref !== state.pref) return false;
+      if (state.emp && j.empType !== state.emp) return false;
+      if (state.fac && j.facility !== state.fac) return false;
+      if (words.length) {
+        const hay = [j.id, j.title, j.job, j.facility, j.area, j.empType, j.hours, j.allowance, j.duties, j.requirements, j.appeal, j.night].join(' ').toLowerCase();
+        if (!words.every(w => hay.indexOf(w) !== -1)) return false;
+      }
+      return true;
+    });
+    out.sort(state.sort === 'pay' ? (a,b) => payMonthly(b) - payMonthly(a) : (a,b) => b.updatedTs - a.updatedTs);
+    return out;
+  }
+
+  function render(){
+    const list = filtered();
+    $('count').textContent = list.length;
+    if (!list.length) {
+      $('list').innerHTML = '<div class="empty">' + (jobs.length ? '条件に合う求人が見つかりませんでした。<br>条件を変えるか、LINEでご希望をお聞かせください。' : '現在掲載中の求人を準備しています。<br>LINEでご希望をお聞かせいただければ、個別にご提案します。') + '</div>';
+      return;
+    }
+    $('list').innerHTML = list.map(j => (
+      '<button class="card" type="button" data-id="' + esc(j.id) + '">'
+      + '<div class="badges">' + (isNew(j) ? '<span class="bdg new">NEW</span>' : '')
+      + (j.empType ? '<span class="bdg">' + esc(j.empType) + '</span>' : '')
+      + (j.facility ? '<span class="bdg gray">' + esc(j.facility) + '</span>' : '')
+      + (j.night && j.night !== 'なし' ? '<span class="bdg gray">' + esc(j.night) + '</span>' : '') + '</div>'
+      + '<h3>' + esc(titleOf(j)) + '</h3>'
+      + '<div class="meta">'
+      + '<div>' + ICON_PIN + '<span>' + esc(j.area) + '</span></div>'
+      + '<div>' + ICON_YEN + '<span class="pay">' + esc(payText(j)) + '</span></div>'
+      + (j.hours ? '<div>' + ICON_CLK + '<span>' + esc(firstLine(j.hours)) + '</span></div>' : '')
+      + '</div>'
+      + '<div class="foot"><span>求人番号 ' + esc(j.id) + (j.updated ? '｜更新 ' + esc(j.updated) : '') + '</span><span class="more">詳細を見る ›</span></div>'
+      + '</button>'
+    )).join('');
+  }
+
+  $('list').addEventListener('click', e => {
+    const c = e.target.closest('.card'); if (c) openDetail(c.getAttribute('data-id'));
+  });
+
+  let current = null;
+  function row(label, val){ return val ? '<div class="row"><dt>' + label + '</dt><dd>' + esc(val) + '</dd></div>' : ''; }
+  function textSec(label, val){ return val ? '<section class="sec"><h4>' + label + '</h4><div class="text">' + esc(val) + '</div></section>' : ''; }
+
+  function openDetail(id){
+    const j = jobs.find(x => x.id === id); if (!j) return;
+    current = j;
+    $('dId').textContent = '求人番号 ' + j.id;
+    $('detail').innerHTML =
+      '<div class="badges">' + (isNew(j) ? '<span class="bdg new">NEW</span>' : '')
+      + (j.empType ? '<span class="bdg">' + esc(j.empType) + '</span>' : '')
+      + (j.facility ? '<span class="bdg gray">' + esc(j.facility) + '</span>' : '') + '</div>'
+      + '<h2 id="dTitle">' + esc(titleOf(j)) + '</h2>'
+      + '<div class="hl meta">'
+      + '<div>' + ICON_PIN + '<span>' + esc(j.area) + '</span></div>'
+      + '<div>' + ICON_YEN + '<span class="pay">' + esc(payText(j)) + '</span></div>'
+      + '</div>'
+      + textSec('アピールポイント', j.appeal)
+      + textSec('仕事内容', j.duties)
+      + textSec('応募資格・必要資格', j.requirements)
+      + '<section class="sec"><h4>募集要項</h4><dl>'
+      + row('職種', j.job)
+      + row('施設種別', j.facility)
+      + row('勤務地', j.area)
+      + row('雇用形態', j.empType)
+      + row('雇用期間', j.term)
+      + row('給与', payText(j))
+      + row('手当・賞与', j.allowance)
+      + row('勤務時間・休日', j.hours)
+      + row('夜勤・オンコール', j.night)
+      + row('加入保険', j.insurance)
+      + row('受動喫煙対策', j.smoking)
+      + row('募集人数', j.headcount ? j.headcount + '名' : '')
+      + '</dl></section>'
+      + '<p class="note">情報更新日：' + esc(j.updated || '—') + '（' + esc(DATA.generatedAt || '') + ' 時点で掲載中）<br>'
+      + '勤務先名・詳細住所はご紹介時にお伝えします。労働条件はご紹介時に書面で明示します。</p>';
+    $('sheet').classList.add('open');
+    $('sheet').setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    document.querySelector('.sheet-body').scrollTop = 0;
+  }
+  function closeDetail(){
+    $('sheet').classList.remove('open');
+    $('sheet').setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  $('closeBtn').onclick = closeDetail;
+  $('sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeDetail(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+  function toast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
+  $('copyId').onclick = () => {
+    if (!current) return;
+    const text = '求人番号 ' + current.id + ' について相談したいです';
+    const done = () => toast('コピーしました。LINEに貼り付けて送信してください');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+    } else fallbackCopy(text, done);
+  };
+  function fallbackCopy(text, done){
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) { toast('求人番号：' + current.id); }
+    ta.remove();
+  }
+
+  render();
+  if (DATA.focusId) openDetail(DATA.focusId);
+}
+</script>
+</body>
+</html>
